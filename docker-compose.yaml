@@ -40,13 +40,8 @@ services:
       - redis
     volumes:
       - ./public/system:/mastodon/public/system
-    environment:
-      POSTGRES_USER: mastodon
-      POSTGRES_DB: mastodon
-      POSTGRES_PASSWORD: mastodon
 
   streaming:
-    #image: plusminusio/mastodon:3.5.0-arm64
     image: tootsuite/mastodon:v3.5.3 
     restart: always
     env_file: .env.production
@@ -77,7 +72,7 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     user: root
-    command: tunnel run --url http://nginx mastodon
+    command: tunnel run --url http://nginx testdon
     volumes:
       - '$HOME/.cloudflared:/root/.cloudflared'
     restart: always
